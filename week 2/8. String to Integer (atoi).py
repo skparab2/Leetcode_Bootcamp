@@ -1,28 +1,43 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <meta name='og:viewport' content='width=device-width,initial-scale=1'>
-    <meta name="og:description" content="Skparab1">
-    <title>Notepad</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" type="image/x-icon" href="pacman-favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Finlandica&display=swap" rel="stylesheet"> 
-  </head>
-  <body>
-    <form>
-      <textarea class="notepad" id="notepad" autofocus>
-      </textarea>
-    </form>
+class Solution(object):
+    def myAtoi(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
 
-    <div class="fullcover" id="fullcover">Saving.</div>
-    <div class="fullcover" id="fullcover1">Loaded.</div>
-    
-    <div class="fullcover" id="fullcover2">Failed.</div>
+        s = s.lstrip()
 
-    <script src="index.js"></script>
+        newstr = ""
 
-  </body>
-</html>
+        mult = 1
+
+        print(s)
+
+        i = 0
+        while (i < len(s)):
+            if (s[i] == "-" and i == 0):
+                mult = -1
+            elif (s[i] == "+" and i == 0):
+                mult = 1
+            elif (not s[i] in "1234567890"):
+                break
+            else:
+                newstr += s[i]
+
+            i += 1
+
+        print(newstr)
+
+        if (newstr == ""):
+            return 0
+
+        
+        newint = int(newstr)*mult
+
+        if (newint < -(2**31)):
+            newint = -(2**31)
+        if (newint > 2**31-1):
+            newint = 2**31-1
+
+
+        return newint
