@@ -1,0 +1,131 @@
+class Solution(object):
+    def decodeString(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        
+        # take the whole thing, put it in a stack
+
+        lst = []
+        nums = [1]
+
+        fullstack = []
+        currentstring = ""     
+
+        currentnumber = None
+
+        i = 0
+        while (i < len(s)):
+            if (s[i] == "["):
+                fullstack.append(currentstring)
+                currentstring = ""
+                currentnumber = None
+            elif (s[i] == "]"):
+                fsp = fullstack.pop()
+                np = nums.pop()
+                print("popped", fsp)
+                print("popped", np)
+                if (currentstring != ""):
+                    currentstring = fsp + (currentstring)*np
+                else:
+                    currentstring = fsp*np + (currentstring)*np
+                
+                fullstack.append(currentstring)
+
+                currentstring = ""
+                currentnumber = None
+            elif (s[i] in "1234567890"):
+                if (currentnumber != None):
+                    # theres some existing number we must add onto 
+                    anum = nums.pop()
+                    anum = anum*10+int(s[i])
+                    nums.append(anum)
+                else:
+                    nums.append(int(s[i]))
+                currentnumber = int(s[i])
+            else:
+                currentstring += s[i]
+                currentnumber = None
+
+            print("at character", s[i])
+            print("currently have", currentstring)
+            print("stack, ", fullstack)
+
+            i += 1
+
+#             elif c == ']':
+#                 num = stack.pop()
+#                 prevString = stack.pop()
+#                 curString = prevString + num*curString
+#             elif c.isdigit():
+#                 curNum = curNum*10 + int(c)
+#             else:
+#                 curString += c
+#         return curString
+
+        print("ultimately")
+        fullstack.append(currentstring)
+        print(fullstack)
+        print(nums)
+
+        ends = ""
+
+        i = 0
+        while (i < len(fullstack)):
+            ends += fullstack[i]
+            i += 1
+
+        return ends
+
+
+
+
+        # how about a stack of queues
+
+        # lst = []
+
+        # currentpos = 0
+
+        # pcount = 0
+
+        # currentlist
+
+        # i = 0
+        # while (i < len(s)):
+        #     if (s[i] in "1234567890"):
+        #         # suppose we get to a point
+                
+        #         print(pcount)
+        #         if (pcount == 0):
+        #             lst.append([])
+        #         currentpos = len(lst)-1
+        #         lst[currentpos].append(s[i])
+
+        #         # here we create a new bunch
+
+        #     elif (s[i] == "["):
+        #         pcount += 1
+        #         pass
+        #     elif (s[i] == "]"):
+        #         pcount -= 1
+        #         # currentpos -= 1
+        #         pass
+        #     else:
+        #         lst[currentpos].append(s[i])
+
+
+        #     i += 1
+
+        
+        # print(lst)
+
+        # now go backwards through the list,
+
+
+
+
+
+
+
+        
