@@ -1,0 +1,45 @@
+class Solution(object):
+    def wordBreak(self, s, wordDict):
+        """
+        :type s: str
+        :type wordDict: List[str]
+        :rtype: bool
+        """
+        
+        # print(s.split("apple"))
+
+        trywords = [s]
+
+        alreadytried = {s: 0}
+
+        i = 0
+        while (i < len(trywords)):
+
+            print("trying words", trywords)
+
+            for word in wordDict:
+
+                if (word not in trywords[i]):
+                    pass
+                tsplit = trywords[i].split(word)
+
+                print("after split", tsplit)
+
+                works = True
+                for aWord in tsplit:
+                    print("splitting by",word)
+                    print("got", tsplit)
+                    if (aWord != "" and not aWord in wordDict):
+                        works = False
+                        if (aWord not in alreadytried):
+                            alreadytried[aWord] = 0
+                            trywords.append(aWord)
+                        break
+                    
+                if (works):
+                    return True
+
+            i += 1
+        
+        return False
+            
